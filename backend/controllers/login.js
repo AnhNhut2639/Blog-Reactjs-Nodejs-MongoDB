@@ -6,6 +6,14 @@ async function login(req, res) {
   return res.json(users);
 }
 
+async function insertUser(req, res) {
+  // let { id } = req.params;
+  let username = req.body.username;
+  let password = req.body.password;
+  console.log(`username:${username} && password:${password}`);
+}
+
 module.exports = {
   login,
+  insertUser,
 };
