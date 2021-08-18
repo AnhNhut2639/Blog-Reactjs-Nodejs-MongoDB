@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-
+const bodyParser = require("body-parser");
 const port = 3001;
 const routers = require("./routers");
 // const auth = require("./api/Login");
@@ -10,7 +10,8 @@ mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
+app.use(bodyParser.json({ limit: "10mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 console.log(process.env.MONGO_URL);
 // app.use("/", (req, res) => {
 //   res.send("Hello co cos");
