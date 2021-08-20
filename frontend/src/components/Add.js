@@ -56,7 +56,9 @@ function Add(props) {
           <button type="submit">Đăng Ký</button>
         </form>
 
-        <div>Danh sách các users trong Database mongoDB</div>
+        <div class="text-red-600">
+          Danh sách các users trong Database mongoDB
+        </div>
         <ul>
           {listUsers.map((user, index) => {
             return <li key={index}>{user.username} </li>;
