@@ -1,10 +1,23 @@
+import React, { Suspense } from "react";
 import "./App.css";
-import Add from "./components/Add";
+
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import NotFound from "./routing/NotFound";
+// import Add from "./components/Add";
+const RoutingIndex = React.lazy(() => import("./routing/index"));
 
 function App() {
   return (
-    <div className="App">
-      <Add />
+    <div className="wrapper">
+      <Suspense fallback={<div>Loading....</div>}>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" component={RoutingIndex} />
+            {/* <Redirect exact from="/" to="/add" /> */}
+            <Route component={NotFound} />
+          </Switch>
+        </BrowserRouter>
+      </Suspense>
     </div>
   );
 }
