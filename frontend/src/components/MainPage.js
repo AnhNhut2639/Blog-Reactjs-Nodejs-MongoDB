@@ -6,10 +6,9 @@ function MainPage(props) {
   const handleClick = () => {
     history.push("/login");
   };
-
   return (
     <React.Fragment>
-      <div>Welcome to the Uniform Store</div>
+      <div>Welcome to the Uniform Store {process.env.REACT_APP_MY_API_KEY}</div>
       <button onClick={handleClick}>Đăng Nhập</button>
     </React.Fragment>
   );

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import "./Login.css";
+import jwt from "jsonwebtoken";
+import Cookies from "js-cookie";
 
 function Login(props) {
   const [dataUsers, setDataUsers] = useState([]);
@@ -31,6 +33,14 @@ function Login(props) {
     });
 
     if (res) {
+      let payload = {
+        user: account,
+        secret: pass,
+      };
+
+      let token = jwt.sign({ payload }, process.env.REACT_APP_MY_SERECT_KEY);
+
+      Cookies.set("ID", token);
       console.log("ban da dang nhap thanh cong");
     } else {
       console.log("sai tai khoan hoac mat khau");
