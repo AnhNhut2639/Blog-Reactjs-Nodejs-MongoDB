@@ -1,0 +1,234 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+/* header */
+.header {
+  height: 15vh;
+  background-color: white;
+}
+.main-header {
+  height: 10vh;
+  width: 100%;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 999;
+}
+
+.main-header .header-logo {
+  flex-grow: 1;
+  height: inherit;
+  /* background-color: beige; */
+  position: relative;
+}
+
+.header-logo img {
+  height: 85px;
+  width: 90px;
+  position: absolute;
+  left: 25%;
+  /* top: 0%; */
+}
+
+.main-header .header-search {
+  flex-grow: 0.8;
+  height: inherit;
+  /* background-color: blue; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-search input {
+  height: 30px;
+  width: 220px;
+  border: #dbdbdb solid 3px;
+  background-color: #fff;
+}
+
+.main-header .header-function {
+  flex-grow: 1.2;
+  height: inherit;
+  /* background-color: green; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.header-function svg {
+  height: 25px;
+  width: 40px;
+  margin-right: 20px;
+}
+
+.header-function img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
+.register-layout {
+  height: 90vh;
+  /* background-color: salmon; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.register-layout .register-left {
+  height: 90vh;
+  /* background-color: salmon; */
+  flex-grow: 0.2;
+}
+.register-layout .register-center {
+  height: 90vh;
+  /* background-color: seagreen; */
+  flex-grow: 2.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.register-center .register-section {
+  background-color: snow;
+  height: 90%;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-position: center;
+  background-size: cover;
+}
+
+.register-section form {
+  height: 100%;
+  width: 100%;
+}
+
+.register-section .register-frame {
+  /* background-color: blueviolet; */
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.register-frame .register-avatar {
+  flex-grow: 1;
+  height: 100%;
+  /* background-color: burlywood; */
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.register-avatar .personnel-avatar {
+  height: 90%;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.personnel-avatar #display_avatar {
+  height: 90%;
+  width: 90%;
+  /* background-color: sienna; */
+  /* background-image: url("/defaultavatar.png"); */
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: ridge 2px #8e8e8e;
+}
+
+.register-avatar .input-avatar {
+  height: 10%;
+  /* background-color: rosybrown; */
+  align-items: center;
+  display: flex;
+}
+
+.register-frame .personnel-info {
+  flex-grow: 1;
+  /* background-color: crimson; */
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.personnel-info .register-form {
+  /* background-color: #8e8e8e; */
+  height: 90%;
+  width: 90%;
+  box-shadow: 5px 10px #8e8e8e;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: space-evenly;
+}
+.register-form .title-form {
+  background-color: skyblue;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: bolder;
+  font-size: 20px;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.register-form label {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  color: #000;
+}
+
+.register-form input {
+  height: 30px;
+}
+
+.register-section .regis-post {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.regis-post button {
+  height: 80%;
+  width: 10%;
+  background-color: skyblue;
+  border-radius: 10px;
+}
+
+/* .register-section .register-avatar {
+    background-color: red;
+    height: 100%;
+    width: 50%;
+    flex-grow: 1;
+  }
+  
+  .register-section .personnel-info {
+    background-color: blue;
+    height: 100%;
+    width: 50%;
+    flex-grow: 1;
+  } */
+
+.register-layout .register-right {
+  height: 90vh;
+  /* background-color: skyblue; */
+  flex-grow: 0.2;
+}

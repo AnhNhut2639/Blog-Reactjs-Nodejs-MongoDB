@@ -1,0 +1,211 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.header {
+  height: 10vh;
+  background-color: red;
+}
+.main-header {
+  height: 10vh;
+  width: 100%;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 999;
+}
+
+.main-header .header-logo {
+  flex-grow: 1;
+  height: inherit;
+  /* background-color: beige; */
+  position: relative;
+}
+
+.header-logo img {
+  height: 85px;
+  width: 90px;
+  position: absolute;
+  left: 25%;
+  /* top: 0%; */
+}
+
+.main-header .header-search {
+  flex-grow: 0.8;
+  height: inherit;
+  /* background-color: blue; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-search input {
+  height: 30px;
+  width: 220px;
+  border: #dbdbdb solid 3px;
+  background-color: #fff;
+}
+
+.main-header .header-function {
+  flex-grow: 1.2;
+  height: inherit;
+  /* background-color: green; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.header-function svg {
+  height: 25px;
+  width: 40px;
+  margin-right: 20px;
+}
+
+.header-function img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
+.new-upload {
+  height: 90vh;
+  /* background-color: rosybrown; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.new-upload .upload-left {
+  height: 90vh;
+  /* background-color: royalblue; */
+  /* width: 20%; */
+  flex-grow: 0.2;
+}
+.new-upload .upload-center {
+  height: 90vh;
+  /* background-color: salmon; */
+  /* width: 20%; */
+  flex-grow: 2.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-center .my-upload {
+  /* background-color: sienna; */
+  /* background-image: url("./public/macbook.jpg"); */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 80vh;
+  width: 90%;
+  /* margin-top: 20px; */
+  border: 1px solid;
+  padding: 10px;
+  /* box-shadow: 5px 10px #888888; */
+}
+
+.my-upload form {
+  /* background-color: #8e8e8e; */
+  height: 100%;
+  width: 100%;
+}
+.my-upload .upload-content {
+  /* background-color: red; */
+  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.my-upload .content-image {
+  height: 100%;
+  /* background-color: salmon; */
+  width: 49%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.content-image .display-image {
+  height: 90%;
+  /* background-color: cadetblue; */
+  border: ridge #8e8e8e 2px;
+  width: 100%;
+  position: relative;
+}
+
+/* .display-image img {
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  } */
+
+.content-image .display-image {
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  /* object-fit: cover; */
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.content-image .content-input {
+  /* background-color: red; */
+  height: 10%;
+}
+
+.my-upload .content-main {
+  height: 100%;
+  /* background-color: aquamarine; */
+  width: 50%;
+}
+
+.my-upload .upload-post {
+  /* background-color: rosybrown; */
+  height: 10%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* padding-right: 10px; */
+}
+
+.upload-post button {
+  margin-right: 20px;
+  height: 40px;
+  width: 80px;
+  background-color: rgb(39, 150, 224);
+  border-radius: 10px;
+}
+
+.upload-content .content-main {
+  /* background-color: aqua; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .content-main textarea {
+    border-radius: 10px;
+    height: 50%;
+    width: 600px;
+    box-shadow: 5px 10px #888888;
+  } */
+
+.new-upload .upload-right {
+  height: 90vh;
+  /* background-color: seagreen; */
+  /* width: 20%; */
+  flex-grow: 0.2;
+}
