@@ -1,0 +1,294 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+body {
+  overflow: scroll;
+}
+.homepage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.homepage .home-left {
+  /* background-color: sandybrown; */
+  height: 90vh;
+  width: 15%;
+}
+
+.homepage .home-lander {
+  /* background-color: tomato; */
+  height: 90vh;
+  width: 70%;
+}
+
+.home-lander .profile {
+  height: 35vh;
+  /* background-color: violet; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: ridge 2px;
+}
+.profile .profile-avatar {
+  flex-grow: 1;
+  align-items: center;
+  /* background-color: khaki; */
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile img {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+.home-lander .profile-info {
+  /* background-color: turquoise; */
+  height: inherit;
+  width: 50%;
+  flex-grow: 1;
+  display: flex;
+  /* flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    padding-top: 20px; */
+}
+
+.profile .profile-info {
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  /* background-color: red; */
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.profile-info .info {
+  /* background-color: blue; */
+  height: 100px;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.info .info-username {
+  font-size: 30px;
+  font-weight: lighter;
+}
+.info .edit-info button {
+  font-size: 20px;
+  background: transparent;
+  border: ridge 2px;
+}
+
+.profile-info .measurement {
+  /* background-color: chartreuse; */
+  height: 25px;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 20px;
+}
+
+.measurement span {
+  font-weight: bolder;
+}
+.profile-info .info-name {
+  width: 60%;
+  /* background-color: whitesmoke; */
+  height: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-grow: 1;
+  padding-left: 50px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.home-lander .tab-func {
+  height: 5vh;
+  width: 100%;
+  /* background-color: yellow; */
+  /* position: relative; */
+}
+.tab-func {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-func button {
+  height: 100%;
+  width: 80px;
+  margin-right: 20px;
+  background: transparent;
+  border: none;
+  background-color: transparent;
+  /* cursor: -webkit-grab; */
+  cursor: grab;
+}
+
+.tab-func svg {
+  height: 20px;
+  width: 20px;
+  margin-top: 5px;
+}
+
+.tab-func button:active {
+  border-top: black solid 1px;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.home-lander .function-feature {
+  height: 50vh;
+  width: 100%;
+  /* background-color: yellowgreen; */
+}
+
+.function-feature .posts {
+  /* height: 50vh; */
+  height: fit-content;
+  width: 100%;
+  /* background-color: #ffc09f; */
+  /* display: none; */
+  /* position: relative; */
+  /* z-index: 1; */
+}
+.function-feature .igtv {
+  height: 50vh;
+  /* height: fit-content; */
+  width: 100%;
+  background-color: #ffee93;
+  display: none;
+}
+.function-feature .saved {
+  height: 50vh;
+  width: 100%;
+  background-color: #a0ced9;
+  display: none;
+}
+.function-feature .tagged {
+  height: 50vh;
+  width: 100%;
+  background-color: #adf7b6;
+  display: none;
+}
+
+.home-lander .profile {
+  display: flex;
+}
+
+.feature-icon svg {
+  height: 30x;
+  width: 30px;
+}
+/* posts */
+
+.external-overlay {
+  /* background-color: red; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.external-overlay .my-post {
+  display: block;
+  height: 350px;
+  width: 340px;
+  background-color: red;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+/* .my-post .image-overlay {
+    height: 350px;
+    width: 340px;
+    background-color: black;
+    position: absolute;
+    z-index: 999;
+  
+  } */
+
+.image-overlay .collapse-icon {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.collapse-icon svg {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.image-overlay .overlay {
+  background-color: black;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.image-overlay .overlay-icon {
+  height: 100%;
+  width: 100%;
+  background-color: red;
+}
+
+.image-overlay .overlay:hover {
+  opacity: 0.5;
+}
+
+.overlay span {
+  margin-right: 20px;
+}
+
+.overlay svg {
+  height: 20px;
+  width: 20px;
+}
+
+.image-overlay img {
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.homepage .home-right {
+  /* background-color: slateblue; */
+  height: 90vh;
+  width: 15%;
+}

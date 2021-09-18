@@ -1,13 +1,18 @@
 import React, { useState } from "react";
+import InputEmoji from "react-input-emoji";
 
 function UploadCenter(props) {
   const [imgBg, setImgBg] = useState("");
+  const [text, setText] = useState("");
 
   const getImgStatus = (e) => {
     if (e.target.files && e.target.files[0]) {
       setImgBg("/" + e.target.files[0].name);
     }
   };
+  // function handleOnEnter(text) {
+  //   console.log("enter", text);
+  // }
 
   return (
     <React.Fragment>
@@ -17,7 +22,7 @@ function UploadCenter(props) {
           <div
             className="my-upload"
             style={{
-              backgroundImage: `url("/macbook.jpg")`,
+              backgroundImage: `url("/BgImage.jpg")`,
             }}
           >
             <form action="hello">
@@ -42,11 +47,19 @@ function UploadCenter(props) {
                   </div>
                 </div>
                 <div className="content-main">
-                  <textarea
+                  {/* <textarea
                     name="mytextarea"
                     id="textarea"
                     placeholder="Nhập tin nhắn ......."
-                  ></textarea>
+                  ></textarea> */}
+                  <InputEmoji
+                    value={text}
+                    onChange={setText}
+                    // onEnter={handleOnEnter}
+                    // cleanOnEnter
+                    // maxLength="20"
+                    placeholder="Type a message"
+                  />
                 </div>
               </div>
               <div className="upload-post">

@@ -7,6 +7,7 @@ import NotFound from "./NotFound";
 import Register from "../components/register/Register.js";
 import NewStatus from "../components/newStatus/NewStatus";
 import NewFeeds from "../components/newFeeds/NewFeeds";
+import HomePage from "../components/homePages/HomePage";
 function Index(props) {
   const match = useRouteMatch();
   console.log(`${match.url}`);
@@ -14,6 +15,7 @@ function Index(props) {
     <Switch>
       <Route exact path={match.url} component={MainPage} />
       <Route path={`${match.url}newsfeeds`} component={NewFeeds} />
+      <Route path={`${match.url}home`} component={HomePage} />
       <Route path={`${match.url}login`} component={Login} />
       <Route path={`${match.url}register`} component={Register} />
       <Route path={`${match.url}newstatus`} component={NewStatus} />

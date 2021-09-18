@@ -3,7 +3,7 @@ import React from "react";
 function MainHeader(props) {
   return (
     <React.Fragment>
-      <div class="header">
+      <div className="header">
         <header>
           <div className="main-header">
             <div className="header-logo">
@@ -21,7 +21,7 @@ function MainHeader(props) {
                 focusable="false"
                 data-prefix="fas"
                 data-icon="home"
-                class="svg-inline--fa fa-home fa-w-18"
+                className="svg-inline--fa fa-home fa-w-18"
                 role="img"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 576 512"
@@ -37,7 +37,7 @@ function MainHeader(props) {
                 focusable="false"
                 data-prefix="far"
                 data-icon="paper-plane"
-                class="svg-inline--fa fa-paper-plane fa-w-16"
+                className="svg-inline--fa fa-paper-plane fa-w-16"
                 role="img"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -53,7 +53,7 @@ function MainHeader(props) {
                 focusable="false"
                 data-prefix="far"
                 data-icon="plus-square"
-                class="svg-inline--fa fa-plus-square fa-w-14"
+                className="svg-inline--fa fa-plus-square fa-w-14"
                 role="img"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 448 512"
@@ -69,7 +69,7 @@ function MainHeader(props) {
                 focusable="false"
                 data-prefix="far"
                 data-icon="compass"
-                class="svg-inline--fa fa-compass fa-w-16"
+                className="svg-inline--fa fa-compass fa-w-16"
                 role="img"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 496 512"
@@ -85,7 +85,7 @@ function MainHeader(props) {
                 focusable="false"
                 data-prefix="far"
                 data-icon="heart"
-                class="svg-inline--fa fa-heart fa-w-16"
+                className="svg-inline--fa fa-heart fa-w-16"
                 role="img"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
