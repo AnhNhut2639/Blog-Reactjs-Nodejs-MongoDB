@@ -2,17 +2,23 @@ import React, { useState } from "react";
 import InputEmoji from "react-input-emoji";
 
 function UploadCenter(props) {
-  const [imgBg, setImgBg] = useState("");
+  // const [imgBg, setImgBg] = useState("");
   const [text, setText] = useState("");
+  const [previewFile, setPreviewFile] = useState();
 
   const getImgStatus = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setImgBg("/" + e.target.files[0].name);
-    }
+    const file = e.target.files[0];
+    console.log(file);
+    previewFileFunc(file);
   };
-  // function handleOnEnter(text) {
-  //   console.log("enter", text);
-  // }
+
+  const previewFileFunc = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewFile(reader.result);
+    };
+  };
 
   return (
     <React.Fragment>
@@ -32,7 +38,7 @@ function UploadCenter(props) {
                     className="display-image"
                     id="display_image"
                     style={{
-                      backgroundImage: `url(${imgBg})`,
+                      backgroundImage: `url(${previewFile})`,
                     }}
                   ></div>
                   <div className="content-input">
@@ -41,7 +47,6 @@ function UploadCenter(props) {
                       className="form-control-file"
                       name="imagePost"
                       id="image_input"
-                      accept="image/png, image/jpg"
                       onChange={getImgStatus}
                     />
                   </div>

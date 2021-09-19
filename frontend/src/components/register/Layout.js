@@ -4,9 +4,16 @@ function Layout(props) {
   const [imgUrl, setImgUrl] = useState("/defaultavatar.png");
 
   const getImgUrl = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setImgUrl("/" + e.target.files[0].name);
-    }
+    const srcFile = e.target.files[0];
+    previewFileSrc(srcFile);
+  };
+
+  const previewFileSrc = (srcFile) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(srcFile);
+    reader.onloadend = () => {
+      setImgUrl(reader.result);
+    };
   };
 
   console.log(imgUrl);
