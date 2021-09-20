@@ -1,6 +1,14 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 // import "./Register.css";
 function Layout(props) {
+  let history = useHistory();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [confirm, setConfirm] = useState();
+  const [fullname, setFullname] = useState();
+  const [email, setEmail] = useState();
+  const [desription, setDescription] = useState();
   const [imgUrl, setImgUrl] = useState("/defaultavatar.png");
 
   const getImgUrl = (e) => {
@@ -15,8 +23,36 @@ function Layout(props) {
       setImgUrl(reader.result);
     };
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submitting.......");
+    register(imgUrl);
+  };
 
-  console.log(imgUrl);
+  const register = async (imgAvatar) => {
+    if (confirm !== password) {
+      return alert("Mật Khẩu không trùng khớp");
+    }
+    try {
+      await fetch("http://localhost:3001/user/register", {
+        method: "POST",
+        body: JSON.stringify({
+          data: imgAvatar,
+          username: username,
+          password: confirm,
+          fullname: fullname,
+          desription: desription,
+          email: email,
+        }),
+        headers: { "Content-type": "application/json" },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+    // history.push("/newsfeeds");
+  };
+
+  // console.log(imgUrl);
   return (
     <React.Fragment>
       <div className="register-layout">
@@ -28,7 +64,7 @@ function Layout(props) {
               backgroundImage: `url("/backgroundregister.png")`,
             }}
           >
-            <form action="">
+            <form onSubmit={handleSubmit}>
               <div className="register-frame">
                 <div className="register-avatar">
                   <div className="personnel-avatar">
@@ -62,6 +98,7 @@ function Layout(props) {
                       id="fullName"
                       name="fullname"
                       placeholder="Nhập Họ và Tên"
+                      onChange={(e) => setFullname(e.target.value)}
                     />
                     <label htmlFor="user">Username</label>
                     <input
@@ -69,6 +106,7 @@ function Layout(props) {
                       id="user"
                       name="username"
                       placeholder="Username"
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                     <label htmlFor="pass">Mật khẩu</label>
                     <input
@@ -76,6 +114,7 @@ function Layout(props) {
                       id="pass"
                       name="password"
                       placeholder="Password"
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                     <label htmlFor="confirm">Xác nhận mật khẩu</label>
                     <input
@@ -83,6 +122,7 @@ function Layout(props) {
                       id="confirm"
                       name="confirmpassword"
                       placeholder="Confirm password"
+                      onChange={(e) => setConfirm(e.target.value)}
                     />
                     <label htmlFor="mail">Email</label>
                     <input
@@ -90,6 +130,7 @@ function Layout(props) {
                       id="mail"
                       name="email"
                       placeholder="emai"
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                     <label htmlFor="descript">Mô tả về bạn</label>
                     <input
@@ -97,10 +138,12 @@ function Layout(props) {
                       id="descript"
                       name="desciptionself"
                       placeholder="Mô tả về bạn"
+                      onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
                 </div>
               </div>
+
               <div className="regis-post">
                 <button type="submit">Regis</button>
               </div>

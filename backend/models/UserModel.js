@@ -12,6 +12,22 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    fullname: {
+      type: String,
+      require: true,
+    },
+    email: {
+      type: String,
+      require: true,
+    },
+    desciption: {
+      type: String,
+      // require:true
+    },
+    avatar: {
+      type: String,
+      require: true,
+    },
   },
   { versionKey: false }
 );

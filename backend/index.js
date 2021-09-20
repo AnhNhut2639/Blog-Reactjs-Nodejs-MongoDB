@@ -34,6 +34,7 @@ app.use(function (req, res, next) {
   next();
 });
 app.use("/login", routers.login);
+app.use("/user", routers.user);
 
 // app.get("/login", auth);
 
