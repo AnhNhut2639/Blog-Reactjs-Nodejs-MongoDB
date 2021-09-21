@@ -14,7 +14,7 @@ async function insertUser(req, res) {
     username: username,
     password: password,
   });
-  res.redirect("/data");
+  // res.redirect(process.env.URL_FRONTEND);
 
   console.log("you've created Account Succesfully !");
 }

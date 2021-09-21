@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import "./Login.css";
@@ -9,6 +10,7 @@ function Login(props) {
   const [dataUsers, setDataUsers] = useState([]);
   const [account, setAccount] = useState();
   const [pass, setPass] = useState();
+  let history = useHistory();
 
   useEffect(() => {
     axios
@@ -41,9 +43,9 @@ function Login(props) {
       let token = jwt.sign({ payload }, process.env.REACT_APP_MY_SERECT_KEY);
 
       Cookies.set("ID", token);
-      console.log("ban da dang nhap thanh cong");
+      history.push("/newsfeeds");
     } else {
-      console.log("sai tai khoan hoac mat khau");
+      alert("Sai tài khoản hoặc mật khẩu");
     }
   };
   return (

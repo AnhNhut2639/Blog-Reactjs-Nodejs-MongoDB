@@ -2,6 +2,7 @@ import React from "react";
 import "./Newstatus.css";
 import MainHeader from "../MainHeader";
 import UploadCenter from "./UploadCenter";
+import { withRouter } from "react-router";
 
 function NewStatus(props) {
   return (
@@ -12,4 +13,4 @@ function NewStatus(props) {
   );
 }
 
-export default NewStatus;
+export default withRouter(NewStatus);
