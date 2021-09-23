@@ -1,9 +1,14 @@
-const model = require("mongoose");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const { v4: uuidv4 } = require("uuid");
 
 const userSchema = mongoose.Schema(
   {
+    id: {
+      type: String,
+      default: uuidv4,
+      require: true,
+    },
     username: {
       type: String,
       required: true,
@@ -28,6 +33,52 @@ const userSchema = mongoose.Schema(
       type: String,
       require: true,
     },
+    phone: {
+      type: String,
+    },
+    gender: {
+      type: String,
+    },
+    dateOfBirth: {
+      type: String,
+    },
+    dateCreated: {
+      type: Date,
+      default: Date.now(),
+      require: true,
+    },
+    lock: {
+      type: Boolean,
+      default: false,
+    },
+    followers: [
+      {
+        idFollower: {
+          type: String,
+        },
+        usernameFollower: {
+          type: String,
+        },
+        dateFollower: {
+          type: Date,
+          default: Date.now(),
+        },
+      },
+    ],
+    following: [
+      {
+        idFollowing: {
+          type: String,
+        },
+        usernameFollowing: {
+          type: String,
+        },
+        dateFollowing: {
+          type: Date,
+          default: Date.now(),
+        },
+      },
+    ],
   },
   { versionKey: false }
 );
