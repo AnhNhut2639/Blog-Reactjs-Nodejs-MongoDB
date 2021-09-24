@@ -13,15 +13,21 @@ import Cookies from "js-cookie";
 function Index(props) {
   const match = useRouteMatch();
   console.log(`${match.url}`);
-  const token = Cookies.get("ID");
+  const token = Cookies.get("accessToken");
   return (
     <Switch>
       <Route exact path={match.url} component={MainPage} />
-      <Route path={`${match.url}newsfeeds`} component={NewFeeds} />
-      <Route path={`${match.url}home`} component={HomePage} />
+      <AuthRoute
+        path={`${match.url}newsfeeds`}
+        component={NewFeeds}
+        token={token}
+      />
+      {/* <Route path={`${match.url}home`} component={HomePage} /> */}
       <Route path={`${match.url}login`} component={Login} />
       <Route path={`${match.url}register`} component={Register} />
       {/* <Route path={`${match.url}newstatus`} component={NewStatus} /> */}
+      <AuthRoute path={`${match.url}home`} component={HomePage} token={token} />
+
       <AuthRoute
         path={`${match.url}newstatus`}
         component={NewStatus}

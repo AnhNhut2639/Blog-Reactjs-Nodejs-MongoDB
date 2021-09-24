@@ -2,8 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const port = 3001;
 const routers = require("./routers");
+const check = require("./middlewares/authencation");
 // const auth = require("./api/Login");
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL, {
@@ -13,9 +15,8 @@ mongoose.connect(process.env.MONGO_URL, {
 app.use(bodyParser.json({ limit: "10mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 console.log(process.env.MONGO_URL);
-// app.use("/", (req, res) => {
-//   res.send("Hello co cos");
-// });
+app.use(cookieParser(process.env.SESSION_SECRET));
+app.use(express.static("public"));
 app.use(function (req, res, next) {
   //to allow cross domain requests to send cookie information.
   res.header("Access-Control-Allow-Credentials", true);

@@ -116,19 +116,4 @@ function HomeLander(props) {
   );
 }
 
-{
-  /* <script>
-function openFeature(feature){
-    var i;
-  var x = document.getElementsByClassName("page");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
-  }
-  document.getElementById(feature).style.display = "flex"; 
-}
-
-
-</script> */
-}
-
 export default HomeLander;

@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputEmoji from "react-input-emoji";
+import { useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 function UploadCenter(props) {
   // const [imgBg, setImgBg] = useState("");
-  const [text, setText] = useState("");
+  let history = useHistory();
+  const [text, setText] = useState();
   const [previewFile, setPreviewFile] = useState();
+  let token = Cookies.get("accessToken");
 
   const getImgStatus = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     previewFileFunc(file);
   };
 
@@ -18,6 +22,36 @@ function UploadCenter(props) {
     reader.onloadend = () => {
       setPreviewFile(reader.result);
     };
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submitting.......");
+    uploadPost(previewFile);
+  };
+
+  const uploadPost = async (previewFile) => {
+    if (text === "") {
+      alert("Hãy nhập nội dung");
+      return;
+    }
+    if (previewFile === undefined) {
+      alert("Hãy chọn ảnh");
+      return;
+    }
+    axios
+      .post("http://localhost:3001/user/newpost", {
+        img: previewFile,
+        content: text,
+        token: token,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    history.push("/home");
   };
 
   return (
@@ -31,7 +65,7 @@ function UploadCenter(props) {
               backgroundImage: `url("/BgImage.jpg")`,
             }}
           >
-            <form action="hello">
+            <form encType="multipart/form-data" onSubmit={handleSubmit}>
               <div className="upload-content">
                 <div className="content-image">
                   <div
@@ -52,18 +86,10 @@ function UploadCenter(props) {
                   </div>
                 </div>
                 <div className="content-main">
-                  {/* <textarea
-                    name="mytextarea"
-                    id="textarea"
-                    placeholder="Nhập tin nhắn ......."
-                  ></textarea> */}
                   <InputEmoji
                     value={text}
-                    onChange={setText}
-                    // onEnter={handleOnEnter}
-                    // cleanOnEnter
-                    // maxLength="20"
                     placeholder="Type a message"
+                    onChange={setText}
                   />
                 </div>
               </div>

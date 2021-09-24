@@ -1,15 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
 
 function Profile(props) {
+  const [info, setInfo] = useState([]);
+
+  const accessToken = Cookies.get("accessToken");
+
+  const result = jwt.decode(accessToken, process.env.REACT_APP_MY_SERECT_KEY);
+  let id = result.payload.id;
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/user/trigger/${id}`)
+      .then((response) => {
+        let { data } = response;
+        setInfo(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [info]);
+
   return (
     <React.Fragment>
       <div className="profile">
         <div className="profile-avatar">
-          <img src="/me2.jpg" alt="avatar" />
+          <img src={info.avatar} alt="avatar" />
         </div>
         <div className="profile-info">
           <div className="info">
-            <div className="info-username">delima_anhnhut</div>
+            <div className="info-username">{info.username}</div>
             <div className="edit-info">
               <button>edit profile</button>
             </div>
@@ -43,7 +65,7 @@ function Profile(props) {
               <span>387</span> following
             </div>
           </div>
-          <div className="info-name">Anh Nhựt</div>
+          <div className="info-name">{info.fullname}</div>
         </div>
       </div>
     </React.Fragment>

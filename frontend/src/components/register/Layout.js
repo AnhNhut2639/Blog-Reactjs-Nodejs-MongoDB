@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 // import "./Register.css";
 function Layout(props) {
   let history = useHistory();
@@ -31,28 +32,46 @@ function Layout(props) {
 
   const register = async (imgAvatar) => {
     if (confirm !== password) {
-      return alert("Mật Khẩu không trùng khớp");
+      alert("Mật Khẩu không trùng khớp");
+      return;
     }
-    try {
-      await fetch("http://localhost:3001/user/register", {
-        method: "POST",
-        body: JSON.stringify({
-          data: imgAvatar,
-          username: username,
-          password: confirm,
-          fullname: fullname,
-          desription: desription,
-          email: email,
-        }),
-        headers: { "Content-type": "application/json" },
+    if (imgUrl === "/defaultavatar.png") {
+      alert("Vui lòng chọn ảnh đại diện");
+      return;
+    }
+    if (username === "") {
+      alert("Vui lòng nhập username");
+      return;
+    }
+
+    if (fullname === "") {
+      alert("Vui lòng nhập tên đầy đủ");
+      return;
+    }
+
+    if (email === "") {
+      alert("Vui lòng nhập email");
+      return;
+    }
+
+    axios
+      .post("http://localhost:3001/user/register", {
+        data: imgAvatar,
+        username: username,
+        password: confirm,
+        fullname: fullname,
+        desription: desription,
+        email: email,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
-    } catch (error) {
-      console.error(error);
-    }
-    // history.push("/newsfeeds");
+    history.push("/login");
   };
 
-  // console.log(imgUrl);
   return (
     <React.Fragment>
       <div className="register-layout">

@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import jwt from "jsonwebtoken";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 function MainHeader(props) {
+  const [person, setPerson] = useState([]);
+
+  const token = Cookies.get("accessToken");
+
+  const result = jwt.decode(token, process.env.REACT_APP_MY_SERECT_KEY);
+  let id = result.payload.id;
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/user/trigger/${id}`)
+      .then((response) => {
+        let { data } = response;
+        setPerson(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <React.Fragment>
       <div className="header">
@@ -96,7 +118,7 @@ function MainHeader(props) {
                 ></path>
               </svg>
 
-              <img src="/me2.jpg" alt="profile" />
+              <img src={person.avatar} alt="profile" />
             </div>
           </div>
         </header>

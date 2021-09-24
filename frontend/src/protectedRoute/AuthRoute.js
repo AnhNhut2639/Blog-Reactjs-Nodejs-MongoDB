@@ -3,10 +3,10 @@ import { Route, Redirect } from "react-router-dom";
 import jwt from "jsonwebtoken";
 
 function AuthRoute({ token: token, component: Component, ...rest }) {
-  console.log(token);
-  const permission = jwt.decode(token, process.env.REACT_APP_MY_SERECT_KEY);
+  // console.log(token);
+  // const permission = jwt.decode(token, process.env.REACT_APP_MY_SERECT_KEY);
 
-  console.log(permission);
+  // console.log(permission);
 
   return (
     <Route

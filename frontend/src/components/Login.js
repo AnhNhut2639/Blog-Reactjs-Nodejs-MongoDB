@@ -14,9 +14,8 @@ function Login(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/login")
+      .get(`http://localhost:3001/login`)
       .then((response) => {
-        // console.log(response.data);
         let { data } = response;
         setDataUsers(data);
       })
@@ -34,15 +33,18 @@ function Login(props) {
       );
     });
 
+    console.log(res);
+
     if (res) {
       let payload = {
-        user: account,
-        secret: pass,
+        user: res.username,
+        secret: res.password,
+        id: res.id,
       };
 
       let token = jwt.sign({ payload }, process.env.REACT_APP_MY_SERECT_KEY);
 
-      Cookies.set("ID", token);
+      Cookies.set("accessToken", token);
       history.push("/newsfeeds");
     } else {
       alert("Sai tài khoản hoặc mật khẩu");
@@ -68,7 +70,7 @@ function Login(props) {
           />
           <i className="fas fa-lock"></i>
           <input type="submit" value="Sign in" />
-          <a href="/">Forgot Password?</a>
+          <a href="http://localhost:3000/register">Regisgter</a>
         </form>
       </div>
     </React.Fragment>
