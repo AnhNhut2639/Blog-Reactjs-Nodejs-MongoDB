@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import jwt from "jsonwebtoken";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function MainHeader(props) {
   const [person, setPerson] = useState([]);
+  let history = useHistory();
 
   const token = Cookies.get("accessToken");
 
@@ -23,13 +25,17 @@ function MainHeader(props) {
       });
   }, []);
 
+  const handleImgCLick = () => {
+    history.push("/home");
+  };
+
   return (
     <React.Fragment>
       <div className="header">
         <header>
           <div className="main-header">
             <div className="header-logo">
-              <a href="/">
+              <a href="/newsfeeds">
                 <img src="/BestLogo.png" alt="BestLogoEver" />
               </a>
             </div>
@@ -118,7 +124,7 @@ function MainHeader(props) {
                 ></path>
               </svg>
 
-              <img src={person.avatar} alt="profile" />
+              <img onClick={handleImgCLick} src={person.avatar} alt="profile" />
             </div>
           </div>
         </header>

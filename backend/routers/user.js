@@ -1,6 +1,7 @@
 const express = require("express");
 const controllers = require("../controllers");
 const UserRouter = express.Router();
+// let check = require("../middlewares/authencation");
 
 // const multer = require("multer");
 // const storage = multer.diskStorage({
@@ -18,5 +19,6 @@ UserRouter.get("/data", controllers.user.userData);
 UserRouter.post("/register", controllers.user.register);
 
 UserRouter.post("/newpost", controllers.user.newPost);
+UserRouter.get("/newsfeeds", controllers.user.newsFeeds);
 
 module.exports = UserRouter;

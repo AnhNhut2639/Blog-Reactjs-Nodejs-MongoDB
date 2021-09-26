@@ -180,7 +180,7 @@ body {
   position: absolute;
   object-fit: cover;
   width: 45px;
-  height: 45px;
+  height: 43px;
   border: solid white 3px;
   border-radius: 50%;
 }
