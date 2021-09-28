@@ -115,10 +115,33 @@ async function newsFeeds(req, res) {
     });
 }
 
+async function home(req, res) {
+  const idOwn = res.locals.user._id;
+  const posts = await postsModel.find({ idUser: idOwn });
+  posts.sort(function (a, b) {
+    return new Date(b.datePosted) - new Date(a.datePosted);
+  });
+
+  const ownPosts = posts.map((post) => {
+    return {
+      datePosted: post.datePosted,
+      likeCounts: post.likeCounts,
+      _id: post._id,
+      image: post.image,
+      content: post.content,
+      idPost: post.idPost,
+      likeList: post.likeList,
+      idUser: idOwn,
+    };
+  });
+  res.json(ownPosts);
+}
+
 module.exports = {
   usertest,
   register,
   userData,
   newPost,
   newsFeeds,
+  home,
 };

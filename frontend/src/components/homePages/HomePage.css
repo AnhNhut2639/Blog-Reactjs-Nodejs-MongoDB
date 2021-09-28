@@ -208,16 +208,17 @@ body {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   flex-wrap: wrap;
 }
 
 .external-overlay .my-post {
   display: block;
-  height: 350px;
-  width: 340px;
+  height: 340px;
+  width: 325px;
   background-color: red;
   margin-bottom: 30px;
+  margin-left: 20px;
   position: relative;
 }
 
