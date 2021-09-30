@@ -1,5 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
+import InputEmoji from "react-input-emoji";
+import {
+  FaRegHeart,
+  FaRegComment,
+  FaRegPaperPlane,
+  FaRegBookmark,
+} from "react-icons/fa";
 
 function PostsPage(props) {
   const [posts, setPosts] = useState([]);
@@ -16,7 +24,86 @@ function PostsPage(props) {
       });
   });
 
-  const handleClick = (user, post) => {};
+  const handleClick = (image, status, avatar, username) => {
+    document.getElementById("reading").style.display = "flex";
+    const element = (
+      <React.Fragment>
+        <div className="overlay" onClick={handleDisplay}>
+          <div className="contentCommon">
+            <div className="image-content">
+              <img src={image} alt="Deo co" />
+            </div>
+
+            <div className="main-content">
+              <div className="info-ownPost">
+                <div className="info-ownImg">
+                  <img src={avatar} alt={username} />
+                </div>
+                <div className="info-ownInfo">{username}</div>
+                <div className="info-option">...</div>
+              </div>
+              {/*  */}
+              <div className="comment-Post">
+                <div className="coverCmt">
+                  <div className="cmt-ownImg">
+                    <img src={avatar} alt={username} />
+                  </div>
+                  <div className="cmt-ownInfo">
+                    <b>{username}:</b>&ensp; {status}
+                  </div>
+                  <div className="cmt-option">
+                    <strong>...</strong>
+                  </div>
+                </div>
+                {/*  */}
+              </div>
+
+              {/*  */}
+              <div className="info-aboutPost">
+                <div className="aboutPosted-icon">
+                  <div className="icon-react">
+                    <FaRegHeart />
+                    &ensp;
+                    <FaRegComment />
+                    &ensp;
+                    <FaRegPaperPlane />
+                  </div>
+
+                  <div className="icon-bookmark">
+                    <FaRegBookmark />
+                  </div>
+                </div>
+
+                <div className="aboutPosted-likedBy">
+                  <p>
+                    Liked by <strong>Thi Thi </strong>and{" "}
+                    <strong>1 other</strong>
+                  </p>
+                  <small>May 9th, 1998</small>
+                </div>
+
+                <div className="aboutPosted-Incommented">
+                  <InputEmoji
+                    // value={cmt}
+                    // onChange={setCmt}
+                    // onEnter={handleOnEnter}
+                    // cleanOnEnter
+                    // maxLength="20"
+                    placeholder="Type a comment"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
+    );
+    ReactDOM.render(element, document.getElementById("reading"));
+  };
+
+  const handleDisplay = () => {
+    document.getElementById("reading").style.display = "none";
+  };
 
   return (
     <React.Fragment>
@@ -26,7 +113,14 @@ function PostsPage(props) {
             return (
               <div
                 className="my-post"
-                onClick={() => handleClick(post.idUser, post.idPost)}
+                onClick={() =>
+                  handleClick(
+                    post.image,
+                    post.content,
+                    post.imageUser,
+                    post.username
+                  )
+                }
               >
                 <div className="image-overlay">
                   <img src={post.image} alt="herb" />
@@ -91,6 +185,8 @@ function PostsPage(props) {
           })}
           {/*  */}
         </div>
+
+        <div className="reading-post" id="reading"></div>
       </div>
     </React.Fragment>
   );
