@@ -11,6 +11,7 @@ import {
 
 function PostsPage(props) {
   const [posts, setPosts] = useState([]);
+  const [cmt, setCmt] = useState([]);
 
   useEffect(() => {
     axios
@@ -22,13 +23,27 @@ function PostsPage(props) {
       .catch(function (error) {
         console.log(error);
       });
-  });
+  }, []);
 
-  const handleClick = (image, status, avatar, username) => {
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/user/getdatacmt", { withCredentials: true })
+      .then(function (response) {
+        let { data } = response;
+        setCmt(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  const handleClick = (image, status, avatar, username, idPost) => {
+    // get comment thong qua idPost
     document.getElementById("reading").style.display = "flex";
+
     const element = (
       <React.Fragment>
-        <div className="overlay" onClick={handleDisplay}>
+        <div className="overlay">
           <div className="contentCommon">
             <div className="image-content">
               <img src={image} alt="Deo co" />
@@ -56,6 +71,24 @@ function PostsPage(props) {
                   </div>
                 </div>
                 {/*  */}
+
+                {cmt.map((cmt) => {
+                  if (idPost === cmt.idPostCmt) {
+                    return (
+                      <div className="coverCmt">
+                        <div className="cmt-ownImg">
+                          <img src={cmt.userAvatar} alt={username} />
+                        </div>
+                        <div className="cmt-ownInfo">
+                          <b>{cmt.userCmt}:</b>&ensp; {cmt.contentCmt}
+                        </div>
+                        <div className="cmt-option">
+                          <strong>...</strong>
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
               </div>
 
               {/*  */}
@@ -83,25 +116,20 @@ function PostsPage(props) {
                 </div>
 
                 <div className="aboutPosted-Incommented">
-                  <InputEmoji
-                    // value={cmt}
-                    // onChange={setCmt}
-                    // onEnter={handleOnEnter}
-                    // cleanOnEnter
-                    // maxLength="20"
-                    placeholder="Type a comment"
-                  />
+                  <InputEmoji placeholder="Type a comment" />
                 </div>
               </div>
             </div>
           </div>
+
+          <div className="alterOverPlay" onClick={handleDisplay}></div>
         </div>
       </React.Fragment>
     );
     ReactDOM.render(element, document.getElementById("reading"));
   };
 
-  const handleDisplay = () => {
+  const handleDisplay = (cmt) => {
     document.getElementById("reading").style.display = "none";
   };
 
@@ -118,7 +146,8 @@ function PostsPage(props) {
                     post.image,
                     post.content,
                     post.imageUser,
-                    post.username
+                    post.username,
+                    post.idPost
                   )
                 }
               >

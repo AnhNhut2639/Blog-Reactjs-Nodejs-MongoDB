@@ -1,5 +1,6 @@
 const usersModel = require("../models/UserModel");
 const postsModel = require("../models/PostsModel");
+const cmtsModels = require("../models/Comments");
 const { cloudinary } = require("../utils/cloudinary");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
@@ -8,6 +9,20 @@ async function usertest(req, res) {
   const id = req.params.id;
   const userdata = await usersModel.findOne({ id: id });
   return res.json(userdata);
+}
+async function usertest2(req, res) {
+  const post = await postsModel.aggregate([
+    {
+      $lookup: {
+        from: "comments",
+        localField: "idPost",
+        foreignField: "idPost",
+        as: "cmtsInPost",
+      },
+    },
+  ]);
+
+  return res.json(post);
 }
 
 async function userData(req, res) {
@@ -143,6 +158,54 @@ async function home(req, res) {
     });
 }
 
+async function inserComments(req, res) {
+  let idPost = req.body.idPost;
+  let idOwn = res.locals.user._id;
+  let contentCmt = req.body.content;
+
+  cmtsModels.create({
+    idUser: idOwn,
+    idPost: idPost,
+    content: contentCmt,
+  });
+  console.log("You have add a comment for post: ", idPost);
+}
+
+async function getDataCommnet(req, res) {
+  const cmtPost = await cmtsModels
+    .find({})
+    .populate("idUser")
+    .then((data) => {
+      data.sort(function (a, b) {
+        return new Date(b.dateComment) - new Date(a.dateComment);
+      });
+
+      const cmtArr = data.map((cmt) => {
+        var date = cmt.dateComment;
+        var datetime = moment(date).fromNow();
+        var x = datetime.split(" ").slice(1, 2);
+        if (
+          x == "days" ||
+          x == "day" ||
+          x == "month" ||
+          x == "months" ||
+          x == "year" ||
+          x == "years"
+        ) {
+          datetime = moment(date).format("MMMM D, YYYY");
+        }
+        return {
+          dateComment: datetime,
+          userAvatar: cmt.idUser.avatar,
+          userCmt: cmt.idUser.username,
+          contentCmt: cmt.content,
+          idPostCmt: cmt.idPost,
+        };
+      });
+      return res.json(cmtArr);
+    });
+}
+
 module.exports = {
   usertest,
   register,
@@ -150,4 +213,7 @@ module.exports = {
   newPost,
   newsFeeds,
   home,
+  inserComments,
+  usertest2,
+  getDataCommnet,
 };

@@ -5,11 +5,16 @@ const postSchema = mongoose.Schema({
     type: String,
     default: uuidv4,
     require: true,
+    ref: "comments",
   },
   idUser: {
     type: String,
     ref: "users",
     require: true,
+  },
+  idComment: {
+    type: String,
+    ref: "comments",
   },
   ownUsername: {
     type: String,

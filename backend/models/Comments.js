@@ -9,6 +9,7 @@ const commentSchema = mongoose.Schema({
   },
   idUser: {
     type: String,
+    ref: "users",
   },
   idPost: {
     type: String,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Story from "./Story";
 import InputEmoji from "react-input-emoji";
 import axios from "axios";
@@ -19,6 +19,23 @@ function MiddleColumn(props) {
         console.log(error);
       });
   }, []);
+
+  const postComments = (idPost) => {
+    if (cmt === "") {
+      alert("Nhập nội dung bình luận");
+      return;
+    } else {
+      axios.post(
+        "http://localhost:3001/user/cmt",
+        {
+          idPost: idPost,
+          content: cmt,
+        },
+        { withCredentials: true }
+      );
+      setCmt("");
+    }
+  };
 
   return (
     <React.Fragment>
@@ -120,14 +137,11 @@ function MiddleColumn(props) {
                   ></path>
                 </svg>
                 <InputEmoji
-                  value={cmt}
                   onChange={setCmt}
-                  // onEnter={handleOnEnter}
-                  // cleanOnEnter
-                  // maxLength="20"
+                  cleanOnEnter
                   placeholder="Type a comment"
                 />
-                <span>Post</span>
+                <span onClick={() => postComments(news.idPost)}>Post</span>
               </div>
             </div>
           );
