@@ -11,18 +11,7 @@ async function usertest(req, res) {
   return res.json(userdata);
 }
 async function usertest2(req, res) {
-  const post = await postsModel.aggregate([
-    {
-      $lookup: {
-        from: "comments",
-        localField: "idPost",
-        foreignField: "idPost",
-        as: "cmtsInPost",
-      },
-    },
-  ]);
-
-  return res.json(post);
+  return res.json({ a: "Hello world !" });
 }
 
 async function userData(req, res) {
@@ -87,47 +76,74 @@ async function newPost(req, res) {
 }
 
 async function newsFeeds(req, res) {
-  const posts = await postsModel
-    .find({})
-    .populate("idUser")
-    .then((data) => {
-      data.sort(function (a, b) {
-        return new Date(b.datePosted) - new Date(a.datePosted);
-      });
-      const arr = data.map((info) => {
-        var date = info.datePosted;
-        var datetime = moment(date).fromNow();
-        var x = datetime.split(" ").slice(1, 2);
-        if (
-          x == "days" ||
-          x == "day" ||
-          x == "month" ||
-          x == "months" ||
-          x == "year" ||
-          x == "years"
-        ) {
-          datetime = moment(date).format("MMMM D, YYYY");
-        }
+  const posts = await postsModel.find({}).populate("idUser");
 
-        return {
-          likeCounts: info.likeCounts,
-          _id: info._id,
-          image: info.image,
-          content: info.content,
-          idPost: info.idPost,
-          likeList: info.likeList,
-          username: info.idUser.username,
-          avatar: info.idUser.avatar,
-          fullname: info.idUser.fullname,
-          datePosted: datetime,
-        };
-      });
+  const newPosts = posts.map((info) => {
+    var date = info.datePosted;
+    var datetime = moment(date).fromNow();
+    var x = datetime.split(" ").slice(1, 2);
 
-      res.json(arr);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    if (
+      x == "days" ||
+      x == "day" ||
+      x == "month" ||
+      x == "months" ||
+      x == "year" ||
+      x == "years"
+    ) {
+      datetime = moment(date).format("MMMM D, YYYY");
+    }
+
+    return {
+      likeCounts: info.likeCounts,
+      _id: info._id,
+      image: info.image,
+      content: info.content,
+      idPost: info.idPost,
+      likeList: info.likeList,
+      username: info.idUser.username,
+      avatar: info.idUser.avatar,
+      fullname: info.idUser.fullname,
+      datePosted: datetime,
+      countCmt: 0, //tạo 1 biến count để nhận vào kết quả đếm cmt ở nested loop
+    };
+  });
+
+  const postCmt = await postsModel.aggregate([
+    {
+      $lookup: {
+        from: "comments",
+        localField: "idPost",
+        foreignField: "idPost",
+        as: "cmtsInPost",
+      },
+    },
+  ]);
+
+  const postsHaveCmt = postCmt.map((item) => {
+    return {
+      idPost: item.idPost,
+      cmtCount: item.cmtsInPost.length,
+    };
+  });
+
+  var finallyArr = [];
+  for (let i = 0; i < postsHaveCmt.length; i++) {
+    let x = postsHaveCmt[i].idPost;
+    for (let y = 0; y < newPosts.length; y++) {
+      let z = newPosts[y].idPost;
+      if (x === z) {
+        newPosts[y].countCmt = postsHaveCmt[i].cmtCount;
+        finallyArr.push(newPosts[y]);
+      }
+    }
+  }
+
+  finallyArr.sort(function (a, b) {
+    return new Date(b.datePosted) - new Date(a.datePosted);
+  });
+
+  res.json(finallyArr);
 }
 
 async function home(req, res) {

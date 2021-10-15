@@ -115,8 +115,12 @@ function MiddleColumn(props) {
               <div className="like-count">{news.likeCounts} likes</div>
               <div className="status-dayPost">
                 <div className="status">
-                  {" "}
-                  <span>{news.username}:</span> {news.content}{" "}
+                  <span>{news.username}:</span> {news.content}
+                  {news.countCmt >= 2 ? (
+                    <p>View all {news.countCmt} comments</p>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="dayPost">{news.datePosted}</div>
               </div>

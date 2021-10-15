@@ -298,6 +298,11 @@ body {
   font-weight: bold;
 }
 
+.status p {
+  color: #888888;
+  cursor: pointer;
+}
+
 .status-dayPost .dayPost {
   padding-left: 10px;
   font-size: 15px;
