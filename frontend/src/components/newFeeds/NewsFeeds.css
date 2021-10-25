@@ -268,6 +268,7 @@ body {
 .icon-like-share-cmt svg {
   height: 25px;
   width: 40px;
+  cursor: pointer;
 }
 
 .like-count {
@@ -455,4 +456,209 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: #8e8e8e;
   font-size: 13px;
+}
+
+.viewdetail {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+  display: none;
+}
+.viewdetail .content-overplay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1001;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-overplay .content-view {
+  background-color: white;
+  height: 90%;
+  width: 70%;
+  z-index: 1003;
+  display: flex;
+  flex-direction: row;
+}
+.content-view .view-image {
+  width: 60%;
+  height: 100%;
+  position: relative;
+}
+
+.view-image img {
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.content-view .view-info {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.view-info .info-owner {
+  /* background-color: red; */
+  flex-grow: 0.1;
+  border-bottom: ridge 1px #838383;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.info-owner .owner-avatar {
+  /* background-color: red; */
+  flex-grow: 0.2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.owner-avatar img {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.info-owner .owner-name {
+  /* background-color: green; */
+  flex-grow: 1.3;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  display: flex;
+  color: #000;
+  font-size: 18px;
+}
+
+.info-owner .owner-option {
+  /* background-color: blue; */
+  flex-grow: 0.3;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: #000;
+  font-size: 18px;
+  font-weight: bolder;
+  padding-right: 20px;
+}
+
+.view-info .info-cmt {
+  /* background-color: blue; */
+  flex-grow: 1.5;
+  width: 100%;
+  position: relative;
+  /* background-color: #adf7b6; */
+  overflow: scroll;
+}
+
+.info-cmt .extra-coverCmt {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.extra-coverCmt .extra-cmt-ownImg {
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  color: #000;
+}
+
+.extra-cmt-ownImg img {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+.extra-coverCmt .extra-cmt-ownInfo {
+  width: 350px;
+  word-wrap: break-word;
+  text-align: justify;
+  margin-left: 5px;
+  color: #000;
+}
+.extra-coverCmt .extra-cmt-option {
+  flex-grow: 1;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+
+.view-info .info-extra {
+  /* background-color: yellow; */
+  flex-grow: 0.4;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-extra .extra-icon {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  color: #000;
+  font-size: 20px;
+}
+.extra-icon .extra-react {
+  margin-left: 10px;
+  flex-grow: 1;
+}
+
+.extra-icon .extra-bookmark {
+  margin-right: 20px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.info-extra .extra-likedBy {
+  flex-grow: 1;
+  padding-left: 20px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  color: #000;
+}
+.info-extra .extra-cmt {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.alterContentView {
+  background-color: rgba(0, 0, 0, 0);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1002;
 }

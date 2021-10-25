@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Login from "../components/Login";
 // import Add from "../components/Add";
-import MainPage from "../components/MainPage";
+// import MainPage from "../components/MainPage";
 import NotFound from "./NotFound";
 import Register from "../components/register/Register.js";
 import NewStatus from "../components/newStatus/NewStatus";
@@ -16,7 +16,7 @@ function Index(props) {
   const token = Cookies.get("accessToken");
   return (
     <Switch>
-      <Route exact path={match.url} component={MainPage} />
+      <AuthRoute exact path={match.url} component={NewFeeds} token={token} />
       <AuthRoute
         path={`${match.url}newsfeeds`}
         component={NewFeeds}

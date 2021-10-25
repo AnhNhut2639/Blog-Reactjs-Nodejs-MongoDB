@@ -1,11 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import Story from "./Story";
 import InputEmoji from "react-input-emoji";
 import axios from "axios";
-
+import {
+  FaRegHeart,
+  FaRegComment,
+  FaRegPaperPlane,
+  FaRegBookmark,
+} from "react-icons/fa";
 function MiddleColumn(props) {
   const [cmt, setCmt] = useState("");
   const [newsFeeds, setNewsFeeds] = useState([]);
+  const [dataCmt, setDataCmt] = useState([]);
 
   useEffect(() => {
     axios
@@ -14,6 +21,18 @@ function MiddleColumn(props) {
         let { data } = response;
         setNewsFeeds(data);
         // console.log(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/user/getdatacmt", { withCredentials: true })
+      .then(function (response) {
+        let { data } = response;
+        setDataCmt(data);
       })
       .catch(function (error) {
         console.log(error);
@@ -35,6 +54,97 @@ function MiddleColumn(props) {
       );
       setCmt("");
     }
+  };
+
+  const viewpost = (image, avatar, uname, status, idPost) => {
+    document.getElementById("view").style.display = "flex";
+
+    const viewElement = (
+      <React.Fragment>
+        <div className="content-overplay">
+          <div className="content-view">
+            <div className="view-image">
+              <img src={image} alt="deo co" />
+            </div>
+            <div className="view-info">
+              <div className="info-owner">
+                <div className="owner-avatar">
+                  <img src={avatar} alt="avatar" />
+                </div>
+                <div className="owner-name">{uname}</div>
+                <div className="owner-option">...</div>
+              </div>
+              <div className="info-cmt">
+                {/*  */}
+                <div className="extra-coverCmt">
+                  <div className="extra-cmt-ownImg">
+                    <img src={avatar} alt={uname} />
+                  </div>
+                  <div className="extra-cmt-ownInfo">
+                    <b>{uname}:</b>&ensp; {status}
+                  </div>
+                  <div className="extra-cmt-option">
+                    <strong>...</strong>
+                  </div>
+                </div>
+                {/*  */}
+
+                {dataCmt.map((cmt) => {
+                  if (idPost === cmt.idPostCmt) {
+                    return (
+                      <div className="extra-coverCmt">
+                        <div className="extra-cmt-ownImg">
+                          <img src={cmt.userAvatar} alt={uname} />
+                        </div>
+                        <div className="extra-cmt-ownInfo">
+                          <b>{cmt.userCmt}:</b>&ensp; {cmt.contentCmt}
+                        </div>
+                        <div className="extra-cmt-option">
+                          <strong>...</strong>
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
+              </div>
+
+              <div className="info-extra">
+                <div className="extra-icon">
+                  <div className="extra-react">
+                    <FaRegHeart />
+                    &ensp;
+                    <FaRegComment />
+                    &ensp;
+                    <FaRegPaperPlane />
+                  </div>
+
+                  <div className="extra-bookmark">
+                    <FaRegBookmark />
+                  </div>
+                </div>
+                <div className="extra-likedBy">
+                  <p>
+                    Liked by <strong>Thi Thi </strong>and{" "}
+                    <strong>1 other</strong>
+                  </p>
+                  <small>May 9th, 1998</small>
+                </div>
+                <div className="extra-cmt">
+                  <InputEmoji placeholder="Type a comment" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="alterContentView" onClick={closeview}></div>
+        </div>
+      </React.Fragment>
+    );
+    ReactDOM.render(viewElement, document.getElementById("view"));
+  };
+
+  const closeview = () => {
+    document.getElementById("view").style.display = "none";
   };
 
   return (
@@ -79,6 +189,15 @@ function MiddleColumn(props) {
                     </svg>
 
                     <svg
+                      onClick={() =>
+                        viewpost(
+                          news.image,
+                          news.avatar,
+                          news.username,
+                          news.content,
+                          news.idPost
+                        )
+                      }
                       aria-hidden="true"
                       focusable="false"
                       data-prefix="far"
@@ -117,7 +236,19 @@ function MiddleColumn(props) {
                 <div className="status">
                   <span>{news.username}:</span> {news.content}
                   {news.countCmt >= 2 ? (
-                    <p>View all {news.countCmt} comments</p>
+                    <p
+                      onClick={() =>
+                        viewpost(
+                          news.image,
+                          news.avatar,
+                          news.username,
+                          news.content,
+                          news.idPost
+                        )
+                      }
+                    >
+                      View all {news.countCmt} comments
+                    </p>
                   ) : (
                     ""
                   )}
@@ -151,9 +282,7 @@ function MiddleColumn(props) {
           );
         })}
 
-        {/*  */}
-
-        {/*  */}
+        <div className="viewdetail" id="view"></div>
       </div>
     </React.Fragment>
   );
