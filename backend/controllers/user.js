@@ -146,6 +146,11 @@ async function newsFeeds(req, res) {
   res.json(finallyArr);
 }
 
+async function getLikeList(req, res) {
+  const likeList = await postsModel.find({}, { idPost: 1, likeList: 1 });
+  res.json(likeList);
+}
+
 async function home(req, res) {
   const idOwn = res.locals.user._id;
   const posts = await postsModel
@@ -222,6 +227,26 @@ async function getDataCommnet(req, res) {
     });
 }
 
+async function likePost(req, res) {
+  let fullname = req.body.fullName;
+  let idUser = req.body.idUser;
+  let idPost = req.body.idPost;
+
+  await postsModel.updateOne(
+    //Nếu dữ liệu thêm vào bị trùng thì sẽ không được add vào database
+    {
+      $and: [{ _id: idPost }, { "likeList.idLiker": { $ne: idUser } }],
+    },
+    {
+      $addToSet: {
+        likeList: {
+          $each: [{ idLiker: idUser, usernameLiker: fullname }],
+        },
+      },
+    }
+  );
+}
+
 module.exports = {
   usertest,
   register,
@@ -232,4 +257,6 @@ module.exports = {
   inserComments,
   usertest2,
   getDataCommnet,
+  likePost,
+  getLikeList,
 };

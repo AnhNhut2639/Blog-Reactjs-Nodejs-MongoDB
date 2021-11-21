@@ -244,11 +244,13 @@ body {
   background-size: cover;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .content-feed-img img {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .content-feed .like-cmt-shr {
@@ -661,4 +663,30 @@ body {
   top: 0px;
   left: 0px;
   z-index: 1002;
+}
+
+/* like heart */
+.content-feed-img .heartLike {
+  position: absolute;
+  justify-content: center;
+  display: none;
+  animation-duration: 3s;
+  animation-name: appear;
+}
+.heartLike img {
+  width: 20%;
+  height: 10%;
+}
+@keyframes appear {
+  from {
+    width: 100%;
+  }
+
+  75% {
+    width: 50%;
+  }
+
+  to {
+    width: 20%;
+  }
 }

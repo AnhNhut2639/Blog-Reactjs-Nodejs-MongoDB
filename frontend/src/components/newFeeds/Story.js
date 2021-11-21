@@ -5,21 +5,21 @@ function Story(props) {
     <React.Fragment>
       <div className="life-story">
         <div className="own-story">
-          <img src="/her.png" alt="story" />
-          <span>Thi Thi</span>
+          <img src="/BestLogo.png" alt="story" />
+          <span>ABC</span>
         </div>
 
         <div className="own-story">
-          <img src="/her.png" alt="story" />
-          <span>Thi Thi</span>
+          <img src="/BestLogo.png" alt="story" />
+          <span>ABC</span>
         </div>
         <div className="own-story">
-          <img src="/her.png" alt="story" />
-          <span>Thi Thi</span>
+          <img src="/BestLogo.png" alt="story" />
+          <span>ABC</span>
         </div>
         <div className="own-story">
-          <img src="/her.png" alt="story" />
-          <span>Thi Thi</span>
+          <img src="/BestLogo.png" alt="story" />
+          <span>ABC</span>
         </div>
       </div>
     </React.Fragment>

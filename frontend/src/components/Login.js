@@ -40,6 +40,7 @@ function Login(props) {
         user: res.username,
         secret: res.password,
         id: res.id,
+        fullName: res.fullname,
       };
 
       let token = jwt.sign({ payload }, process.env.REACT_APP_MY_SERECT_KEY);
