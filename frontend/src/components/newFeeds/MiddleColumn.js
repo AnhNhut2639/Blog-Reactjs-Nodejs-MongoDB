@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ReactDOM, { unmountComponentAtNode } from "react-dom";
+import ReactDOM from "react-dom";
 import Story from "./Story";
 import InputEmoji from "react-input-emoji";
 import axios from "axios";
@@ -27,12 +27,11 @@ function MiddleColumn(props) {
       .then((response) => {
         let { data } = response;
         setNewsFeeds(data);
-        // console.log(data);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [newsFeeds]);
 
   useEffect(() => {
     axios
@@ -45,7 +44,6 @@ function MiddleColumn(props) {
         console.log(error);
       });
   }, []);
-
   const postComments = (idPost) => {
     if (cmt === "") {
       alert("Nhập nội dung bình luận");
@@ -194,7 +192,8 @@ function MiddleColumn(props) {
     <React.Fragment>
       <div className="middle-column">
         <Story />
-        {newsFeeds.map((news, index) => {
+
+        {newsFeeds.map((news) => {
           return (
             <div className="news-feed">
               <div className="info-feed">
@@ -221,9 +220,8 @@ function MiddleColumn(props) {
                 </div>
                 <div className="like-cmt-shr">
                   <div className="icon-like-share-cmt">
-                    <span id="likeButton"></span>
-                    {news.likeList.map((item) => {
-                      if (item.idLiker === idCurrentUser) {
+                    {news.likeList.map((like) => {
+                      if (like.idLiker === idCurrentUser) {
                         return (
                           <span>
                             <FaHeart
@@ -231,13 +229,6 @@ function MiddleColumn(props) {
                               onClick={() => handleLikePost(news._id)}
                             />
                           </span>
-                        );
-                      }
-                      if (idCurrentUser !== item.idLiker) {
-                        return (
-                          <FaRegHeart
-                            onClick={() => handleLikePost(news._id)}
-                          />
                         );
                       }
                     })}

@@ -95,7 +95,7 @@ async function newsFeeds(req, res) {
     }
 
     return {
-      likeCounts: info.likeCounts,
+      likeCounts: info.likeList.length,
       _id: info._id,
       image: info.image,
       content: info.content,
@@ -147,7 +147,14 @@ async function newsFeeds(req, res) {
 }
 
 async function getLikeList(req, res) {
-  const likeList = await postsModel.find({}, { idPost: 1, likeList: 1 });
+  const arr = await postsModel.find({}, { idPost: 1, likeList: 1 });
+  const likeList = [];
+  for (let item of arr) {
+    for (let subitem of item.likeList) {
+      likeList.push(subitem);
+    }
+  }
+
   res.json(likeList);
 }
 
