@@ -29,5 +29,6 @@ UserRouter.post("/cmt", check.authen, controllers.user.inserComments);
 UserRouter.get("/getdatacmt", controllers.user.getDataCommnet);
 UserRouter.post("/likepost", controllers.user.likePost);
 UserRouter.get("/getlikelist", controllers.user.getLikeList);
+UserRouter.get("/getusers", check.authen, controllers.user.getUsers);
 
 module.exports = UserRouter;

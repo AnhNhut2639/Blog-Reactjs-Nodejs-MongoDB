@@ -254,6 +254,30 @@ async function likePost(req, res) {
   );
 }
 
+async function getUsers(req, res) {
+  let idOwn = res.locals.user.id;
+  const users = await usersModel.find({ id: { $ne: idOwn } });
+  users.sort(function (a, b) {
+    return new Date(b.dateCreated) - new Date(a.dateCreated);
+  });
+
+  const list = users.map((user) => {
+    return {
+      username: user.username,
+      fullName: user.fullname,
+      avatar: user.avatar,
+      id: user.id,
+      followers: user.followers,
+      following: user.following,
+      dateCreated: moment(user.dateCreated).format("MMMM D, YYYY"),
+    };
+  });
+
+  const listUsers = list.slice(0, 4);
+
+  res.json(listUsers);
+}
+
 module.exports = {
   usertest,
   register,
@@ -266,4 +290,5 @@ module.exports = {
   getDataCommnet,
   likePost,
   getLikeList,
+  getUsers,
 };
