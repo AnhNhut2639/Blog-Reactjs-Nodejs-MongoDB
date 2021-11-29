@@ -278,6 +278,20 @@ async function getUsers(req, res) {
   res.json(listUsers);
 }
 
+async function unLike(req, res) {
+  let idPost = req.body.idPost;
+  let idUser = req.body.idCurrentUser;
+
+  await postsModel.updateMany(
+    { _id: idPost },
+    {
+      $pull: {
+        likeList: { idLiker: idUser },
+      },
+    }
+  );
+}
+
 module.exports = {
   usertest,
   register,
@@ -291,4 +305,5 @@ module.exports = {
   likePost,
   getLikeList,
   getUsers,
+  unLike,
 };

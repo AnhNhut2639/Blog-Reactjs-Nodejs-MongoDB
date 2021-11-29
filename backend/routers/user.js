@@ -30,5 +30,6 @@ UserRouter.get("/getdatacmt", controllers.user.getDataCommnet);
 UserRouter.post("/likepost", controllers.user.likePost);
 UserRouter.get("/getlikelist", controllers.user.getLikeList);
 UserRouter.get("/getusers", check.authen, controllers.user.getUsers);
+UserRouter.post("/unlike", controllers.user.unLike);
 
 module.exports = UserRouter;
