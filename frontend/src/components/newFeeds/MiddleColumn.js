@@ -171,6 +171,25 @@ function MiddleColumn(props) {
       });
   };
 
+  const handleUnlikePost = (id) => {
+    let idPost = id;
+    axios
+      .post(
+        "http://localhost:3001/user/unlike",
+        {
+          idPost,
+          idCurrentUser,
+        },
+        { withCredentials: true }
+      )
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <React.Fragment>
       <div className="middle-column">
@@ -203,13 +222,14 @@ function MiddleColumn(props) {
                 </div>
                 <div className="like-cmt-shr">
                   <div className="icon-like-share-cmt">
+                    {/* {console.log(news.likeList)} */}
                     {news.likeList.map((like) => {
                       if (like.idLiker === idCurrentUser) {
                         return (
                           <span>
                             <FaHeart
                               color="red"
-                              onClick={() => handleLikePost(news._id)}
+                              onClick={() => handleUnlikePost(news._id)}
                             />
                           </span>
                         );
