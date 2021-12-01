@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import "./App.css";
 
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NotFound from "./routing/NotFound";
 // import Add from "./components/Add";
 const RoutingIndex = React.lazy(() => import("./routing/index"));

@@ -7,12 +7,12 @@ import jwt from "jsonwebtoken";
 import Cookies from "js-cookie";
 import Comment from "./Comment";
 import {
-  FaHeart,
   FaRegHeart,
   FaRegComment,
   FaRegPaperPlane,
   FaRegBookmark,
 } from "react-icons/fa";
+import LikeButton from "./LikeButton";
 function MiddleColumn(props) {
   const token = Cookies.get("accessToken");
   const currentUser = jwt.decode(token, process.env.REACT_APP_MY_SERECT_KEY);
@@ -20,6 +20,7 @@ function MiddleColumn(props) {
 
   const [newsFeeds, setNewsFeeds] = useState([]);
   const [dataCmt, setDataCmt] = useState([]);
+  const [listsLike, setListsLike] = useState([]);
 
   useEffect(() => {
     axios
@@ -44,6 +45,20 @@ function MiddleColumn(props) {
         console.log(error);
       });
   }, [dataCmt]);
+
+  // get lists like of current user
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/user/getlikelist", { withCredentials: true })
+      .then(function (response) {
+        let { data } = response;
+        setListsLike(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [listsLike]);
+
   const viewpost = (image, avatar, uname, status, idPost) => {
     document.getElementById("view").style.display = "flex";
 
@@ -135,24 +150,24 @@ function MiddleColumn(props) {
     document.getElementById("view").style.display = "none";
   };
 
-  const handleLike = (id) => {
+  const handleLike = (id, idPostToAdd) => {
     document.getElementById(id).style.display = "flex";
     setTimeout(() => {
-      handleHideHeart(id);
+      handleHideHeart(id, idPostToAdd);
     }, 1000);
   };
 
-  const handleHideHeart = (id) => {
+  const handleHideHeart = (id, idPostToAdd) => {
     document.getElementById(id).style.display = "none";
 
-    handleLikePost(id);
+    handleLikePost(id, idPostToAdd);
   };
-  const handleLikePost = (id) => {
+  const handleLikePost = (id, idPostToAdd) => {
     const result = jwt.decode(token, process.env.REACT_APP_MY_SERECT_KEY);
     let idUser = result.payload.id;
-    let idPost = id;
+    let idPost = id; //_id
     let fullName = result.payload.fullName;
-    // luu thong tin nguoi like
+    // luu thong tin nguoi like vao post
     axios
       .post(
         "http://localhost:3001/user/likepost",
@@ -169,16 +184,14 @@ function MiddleColumn(props) {
       .catch(function (error) {
         console.log(error);
       });
-  };
 
-  const handleUnlikePost = (id) => {
-    let idPost = id;
+    // luu thong tin bai viet duoc like vao user
     axios
       .post(
-        "http://localhost:3001/user/unlike",
+        "http://localhost:3001/user/buttonlike",
         {
-          idPost,
-          idCurrentUser,
+          idUser, //idCurrentUser
+          idPost: idPostToAdd, //news.idPost
         },
         { withCredentials: true }
       )
@@ -213,7 +226,7 @@ function MiddleColumn(props) {
               <div className="content-feed">
                 <div
                   className="content-feed-img"
-                  onDoubleClick={() => handleLike(news._id)}
+                  onDoubleClick={() => handleLike(news._id, news.idPost)}
                 >
                   <img src={news.image} alt="Tom hid" />
                   <div className="heartLike" id={news._id}>
@@ -222,20 +235,12 @@ function MiddleColumn(props) {
                 </div>
                 <div className="like-cmt-shr">
                   <div className="icon-like-share-cmt">
-                    {/* {console.log(news.likeList)} */}
-                    {news.likeList.map((like) => {
-                      if (like.idLiker === idCurrentUser) {
-                        return (
-                          <span>
-                            <FaHeart
-                              color="red"
-                              onClick={() => handleUnlikePost(news._id)}
-                            />
-                          </span>
-                        );
-                      }
-                    })}
-
+                    <LikeButton
+                      idPost={news.idPost}
+                      idToUnLike={news._id}
+                      idCurrentUser={idCurrentUser}
+                      userFullname={currentUser.payload.fullName}
+                    />
                     <svg
                       onClick={() =>
                         viewpost(

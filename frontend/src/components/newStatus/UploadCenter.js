@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import InputEmoji from "react-input-emoji";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";

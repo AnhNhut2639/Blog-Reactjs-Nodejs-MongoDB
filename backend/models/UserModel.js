@@ -79,6 +79,13 @@ const userSchema = mongoose.Schema(
         },
       },
     ],
+    listLikes: [
+      {
+        idPost: {
+          type: String,
+        },
+      },
+    ],
   },
   { versionKey: false }
 );

@@ -28,8 +28,14 @@ UserRouter.post("/cmt", check.authen, controllers.user.inserComments);
 
 UserRouter.get("/getdatacmt", controllers.user.getDataCommnet);
 UserRouter.post("/likepost", controllers.user.likePost);
-UserRouter.get("/getlikelist", controllers.user.getLikeList);
+UserRouter.get("/getlikelist", check.authen, controllers.user.getLikeList);
 UserRouter.get("/getusers", check.authen, controllers.user.getUsers);
 UserRouter.post("/unlike", controllers.user.unLike);
+UserRouter.post("/buttonlike", check.authen, controllers.user.handleButtonLike);
+UserRouter.post(
+  "/buttonunlike",
+  check.authen,
+  controllers.user.handleUnLikeButton
+);
 
 module.exports = UserRouter;

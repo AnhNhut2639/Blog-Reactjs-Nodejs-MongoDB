@@ -16,7 +16,6 @@ function RightColumn(props) {
       .then((response) => {
         let { data } = response;
         setPerson(data);
-        console.log(data);
       })
       .catch(function (error) {
         console.log(error);

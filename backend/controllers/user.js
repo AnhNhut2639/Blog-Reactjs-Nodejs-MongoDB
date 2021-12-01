@@ -147,10 +147,12 @@ async function newsFeeds(req, res) {
 }
 
 async function getLikeList(req, res) {
-  const arr = await postsModel.find({}, { idPost: 1, likeList: 1 });
+  const idOwn = res.locals.user.id;
+
+  const listsLike = await usersModel.find({ id: idOwn }, { listLikes: 1 });
   const likeList = [];
-  for (let item of arr) {
-    for (let subitem of item.likeList) {
+  for (let item of listsLike) {
+    for (let subitem of item.listLikes) {
       likeList.push(subitem);
     }
   }
@@ -254,6 +256,24 @@ async function likePost(req, res) {
   );
 }
 
+async function handleButtonLike(req, res) {
+  let idUser = req.body.idUser;
+  let idPost = req.body.idPost;
+
+  await usersModel.updateOne(
+    {
+      $and: [{ id: idUser }, { "listLikes.idPost": { $ne: idPost } }],
+    },
+    {
+      $addToSet: {
+        listLikes: {
+          $each: [{ idPost: idPost }],
+        },
+      },
+    }
+  );
+}
+
 async function getUsers(req, res) {
   let idOwn = res.locals.user.id;
   const users = await usersModel.find({ id: { $ne: idOwn } });
@@ -292,6 +312,18 @@ async function unLike(req, res) {
   );
 }
 
+async function handleUnLikeButton(req, res) {
+  let idPostLike = req.body.idPostLike;
+  let idUser = req.body.idUser;
+  await usersModel.updateMany(
+    { id: idUser },
+    {
+      $pull: {
+        listLikes: { idPost: idPostLike },
+      },
+    }
+  );
+}
 module.exports = {
   usertest,
   register,
@@ -306,4 +338,6 @@ module.exports = {
   getLikeList,
   getUsers,
   unLike,
+  handleButtonLike,
+  handleUnLikeButton,
 };
