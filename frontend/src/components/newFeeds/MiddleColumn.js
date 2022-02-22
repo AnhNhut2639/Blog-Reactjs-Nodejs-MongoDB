@@ -208,9 +208,9 @@ function MiddleColumn(props) {
       <div className="middle-column">
         <Story />
 
-        {newsFeeds.map((news) => {
+        {newsFeeds.map((news, index) => {
           return (
-            <div className="news-feed">
+            <div className="news-feed" key={index}>
               <div className="info-feed">
                 <div className="logo-feed">
                   <img src={news.avatar} alt="Logo" />

@@ -75,7 +75,7 @@ function PostsPage(props) {
                 {cmt.map((cmt) => {
                   if (idPost === cmt.idPostCmt) {
                     return (
-                      <div className="coverCmt">
+                      <div key={cmt.idPostCmt} className="coverCmt">
                         <div className="cmt-ownImg">
                           <img src={cmt.userAvatar} alt={username} />
                         </div>
@@ -90,8 +90,6 @@ function PostsPage(props) {
                   }
                 })}
               </div>
-
-              {/*  */}
               <div className="info-aboutPost">
                 <div className="aboutPosted-icon">
                   <div className="icon-react">
@@ -140,6 +138,7 @@ function PostsPage(props) {
           {posts.map((post) => {
             return (
               <div
+                key={post.idPost}
                 className="my-post"
                 onClick={() =>
                   handleClick(

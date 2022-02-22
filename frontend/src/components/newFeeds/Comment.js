@@ -60,7 +60,12 @@ function Comment(props) {
       {showPicker && (
         <Picker pickerStyle={{ width: "100%" }} onEmojiClick={onEmojiClick} />
       )}
-      <span onClick={() => handlePostCmt(id)}>post</span>
+      <button
+        disabled={cmt > 0 ? false : true}
+        onClick={() => handlePostCmt(id)}
+      >
+        post
+      </button>
     </React.Fragment>
   );
 }

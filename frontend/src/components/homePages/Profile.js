@@ -21,7 +21,7 @@ function Profile(props) {
       .catch(function (error) {
         console.log(error);
       });
-  }, [info]);
+  }, [id]);
 
   return (
     <React.Fragment>

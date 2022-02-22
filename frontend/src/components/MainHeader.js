@@ -9,6 +9,7 @@ import {
   FaHome,
   FaRegPlusSquare,
   FaRegCompass,
+  FaSearch,
 } from "react-icons/fa";
 
 function MainHeader(props) {
@@ -30,7 +31,7 @@ function MainHeader(props) {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [id]);
 
   const handleImgCLick = () => {
     history.push("/home");
@@ -47,7 +48,10 @@ function MainHeader(props) {
               </a>
             </div>
             <div className="header-search">
-              <input type="text" placeholder="Search" />
+              <div className="abs-icon">
+                <FaSearch className="icon" id="iconSearch" />
+                <input type="text" placeholder="Search" />
+              </div>
             </div>
             <div className="header-function">
               <FaHome />

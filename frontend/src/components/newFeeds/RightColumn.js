@@ -22,7 +22,7 @@ function RightColumn(props) {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     axios
