@@ -75,7 +75,7 @@ function PostsPage(props) {
                 {cmt.map((cmt) => {
                   if (idPost === cmt.idPostCmt) {
                     return (
-                      <div key={cmt.idPostCmt} className="coverCmt">
+                      <div key={cmt.contentCmt} className="coverCmt">
                         <div className="cmt-ownImg">
                           <img src={cmt.userAvatar} alt={username} />
                         </div>

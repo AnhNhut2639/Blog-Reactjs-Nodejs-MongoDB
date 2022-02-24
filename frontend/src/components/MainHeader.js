@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import jwt from "jsonwebtoken";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import {
   FaRegHeart,
   FaRegPaperPlane,
@@ -33,19 +33,15 @@ function MainHeader(props) {
       });
   }, [id]);
 
-  const handleImgCLick = () => {
-    history.push("/home");
-  };
-
   return (
     <React.Fragment>
       <div className="header">
         <header>
           <div className="main-header">
             <div className="header-logo">
-              <a href="/newsfeeds">
+              <Link to="/newsfeeds">
                 <img src="/BestLogo.png" alt="BestLogoEver" />
-              </a>
+              </Link>
             </div>
             <div className="header-search">
               <div className="abs-icon">
@@ -63,8 +59,9 @@ function MainHeader(props) {
               <FaRegCompass />
 
               <FaRegHeart />
-
-              <img onClick={handleImgCLick} src={person.avatar} alt="profile" />
+              <Link to="/home">
+                <img src={person.avatar} alt="profile" />
+              </Link>
             </div>
           </div>
         </header>

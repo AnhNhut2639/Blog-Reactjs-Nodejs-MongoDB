@@ -109,7 +109,6 @@ input[placeholder="Search"] {
   /* background-color: #87d68d; */
 }
 .middle-column {
-  /* height: fit-content; */
   height: 90vh;
   width: 30%;
   flex-grow: 1;
@@ -159,7 +158,18 @@ input[placeholder="Search"] {
   height: 66px;
   border: solid red 3px;
   border-radius: 50%;
+  /* animation: spinner infinite 2s linear; */
 }
+
+@keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .own-story span {
   color: black;
   font-family: sans-serif;
@@ -732,5 +742,26 @@ input[placeholder="Search"] {
 
   to {
     width: 20%;
+  }
+}
+
+/* responsive */
+/* mobile max-width <740px */
+@media only screen and (max-width: 46.1875em) {
+  /* end service */
+}
+
+/* tablet */
+
+@media only screen and (min-width: 46.25em) and (max-width: 63.9735em) {
+}
+
+/* mobile && table === width < 1024px */
+@media only screen and (max-width: 63.9735em) {
+  .right-column {
+    display: none;
+  }
+  .left-column {
+    display: none;
   }
 }

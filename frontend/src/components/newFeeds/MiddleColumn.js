@@ -20,11 +20,15 @@ function MiddleColumn(props) {
 
   const [newsFeeds, setNewsFeeds] = useState([]);
   const [dataCmt, setDataCmt] = useState([]);
-  const [listsLike, setListsLike] = useState([]);
+  // const [listsLike, setListsLike] = useState([]);
 
   useEffect(() => {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
     axios
-      .get("http://localhost:3001/user/newsfeeds")
+      .get("http://localhost:3001/user/newsfeeds", {
+        cancelToken: source.token,
+      })
       .then((response) => {
         let { data } = response;
         setNewsFeeds(data);
@@ -32,11 +36,19 @@ function MiddleColumn(props) {
       .catch(function (error) {
         console.log(error);
       });
+    return () => {
+      source.cancel();
+    };
   }, [newsFeeds]);
 
   useEffect(() => {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
     axios
-      .get("http://localhost:3001/user/getdatacmt", { withCredentials: true })
+      .get("http://localhost:3001/user/getdatacmt", {
+        withCredentials: true,
+        cancelToken: source.token,
+      })
       .then(function (response) {
         let { data } = response;
         setDataCmt(data);
@@ -44,20 +56,23 @@ function MiddleColumn(props) {
       .catch(function (error) {
         console.log(error);
       });
+    return () => {
+      source.cancel();
+    };
   }, [dataCmt]);
 
   // get lists like of current user
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/user/getlikelist", { withCredentials: true })
-      .then(function (response) {
-        let { data } = response;
-        setListsLike(data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [listsLike]);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3001/user/getlikelist", { withCredentials: true })
+  //     .then(function (response) {
+  //       let { data } = response;
+  //       setListsLike(data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }, [listsLike]);
 
   const viewpost = (image, avatar, uname, status, idPost) => {
     document.getElementById("view").style.display = "flex";
@@ -95,7 +110,7 @@ function MiddleColumn(props) {
                 {dataCmt.map((cmt) => {
                   if (idPost === cmt.idPostCmt) {
                     return (
-                      <div className="extra-coverCmt">
+                      <div key={cmt.contentCmt} className="extra-coverCmt">
                         <div className="extra-cmt-ownImg">
                           <img src={cmt.userAvatar} alt={uname} />
                         </div>

@@ -61,7 +61,7 @@ function Comment(props) {
         <Picker pickerStyle={{ width: "100%" }} onEmojiClick={onEmojiClick} />
       )}
       <button
-        disabled={cmt > 0 ? false : true}
+        disabled={cmt >= 0 ? true : false}
         onClick={() => handlePostCmt(id)}
       >
         post

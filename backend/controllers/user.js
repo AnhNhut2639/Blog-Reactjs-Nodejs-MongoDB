@@ -139,11 +139,9 @@ async function newsFeeds(req, res) {
     }
   }
 
-  finallyArr.sort(function (a, b) {
-    return new Date(b.datePosted) - new Date(a.datePosted);
-  });
+  const sortedArr = finallyArr.reverse();
 
-  res.json(finallyArr);
+  return res.json(sortedArr);
 }
 
 async function getLikeList(req, res) {

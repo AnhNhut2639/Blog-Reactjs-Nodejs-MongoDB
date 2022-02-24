@@ -9,8 +9,13 @@ function LikeButton(props) {
   // userFullname để add vào post khi like
   const [list, setList] = useState([]);
   useEffect(() => {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
     axios
-      .get("http://localhost:3001/user/getlikelist", { withCredentials: true })
+      .get("http://localhost:3001/user/getlikelist", {
+        withCredentials: true,
+        cancelToken: source.token,
+      })
       .then(function (response) {
         let { data } = response;
         setList(data);
@@ -18,6 +23,10 @@ function LikeButton(props) {
       .catch(function (error) {
         console.log(error);
       });
+
+    return () => {
+      source.cancel();
+    };
   }, [list]);
 
   const handleUnlikePost = (id, user, idPostLik) => {
