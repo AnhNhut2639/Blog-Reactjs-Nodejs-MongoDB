@@ -1,75 +1,130 @@
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
 body {
-  margin: 0;
-  padding: 0;
-  /* background: radial-gradient(#a429bc, #9225a7, #7f2092); */
   height: 100vh;
   overflow: hidden;
   font-family: "Noto Sans TC", sans-serif;
 }
+
+.section {
+  height: 100vh;
+  width: 100wh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url("https://res.cloudinary.com/anhnhut/image/upload/v1645961727/dev_setups/img2_uzgktb.jpg");
+  background-repeat: no-repeat;
+}
 .center {
-  width: 430px;
-  margin: 130px auto;
-  position: relative;
+  background-color: white;
+  height: 80%;
+  width: 30%;
+  border-radius: 10px;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
 .center .header {
-  font-size: 28px;
-  font-weight: bold;
-  color: white;
-  padding: 25px 0 30px 25px;
-  background: #5c1769;
-  border-bottom: 1px solid #370e3f;
-  border-radius: 5px 5px 0 0;
-}
-.center form {
-  position: absolute;
-  background: white;
   width: 100%;
-  padding: 50px 10px 0 30px;
-  box-sizing: border-box;
-  border: 1px solid #6d1c7d;
-  border-radius: 0 0 5px 5px;
+  height: 45%;
+  display: flex;
+  justify-content: center;
+  background-image: url("https://res.cloudinary.com/anhnhut/image/upload/v1645961726/dev_setups/img_l4hvpa.jpg");
+  background-repeat: no-repeat;
 }
-form input {
-  height: 50px;
-  width: 90%;
-  padding: 0 10px;
-  border-radius: 3px;
-  border: 1px solid silver;
-  font-size: 18px;
+
+.header h1 {
+  color: white;
+}
+
+.center .footer {
+  width: 100%;
+  height: 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn__login button {
+  background-color: #00b1b7;
+  margin-top: 10px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  height: 30px;
+  width: 120px;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+.form__login form {
+  display: flex;
+  flex-direction: column;
+}
+
+form .frm__icon {
+  background-color: #00b1b7;
+  border: none;
+  width: 350px;
+  height: 40px;
+  margin-bottom: 5px;
+  border-radius: 50px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frm__icon span {
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.frm__icon input {
+  border: none;
+  height: 32px;
+  width: 290px;
+  background-color: inherit;
+  margin-left: 15px;
+  color: white;
+  font-size: large;
+  margin-top: 2px;
+}
+.frm__icon input:focus {
   outline: none;
 }
-form input[type="password"] {
-  margin-top: 20px;
+
+.form__login input::placeholder {
+  color: whitesmoke;
+  font-size: large;
 }
-form i {
-  position: absolute;
-  font-size: 25px;
-  color: grey;
-  margin: 15px 0 0 -45px;
-}
-i.fa-lock {
-  margin-top: 35px;
-}
-form input[type="submit"] {
-  margin-top: 40px;
-  margin-bottom: 40px;
-  width: 130px;
-  height: 45px;
+
+form button {
+  margin-top: 30px;
+  margin-left: 130px;
+  background-color: #00b1b7;
+  border-radius: 50px;
+  text-transform: uppercase;
+  height: 30px;
+  width: 100px;
+  border: none;
   color: white;
+  text-align: center;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+.regis {
+  margin-bottom: 30px;
+  color: #0b998b;
   cursor: pointer;
-  line-height: 45px;
-  border-radius: 45px;
-  border-radius: 5px;
-  background: #5c1769;
-}
-form input[type="submit"]:hover {
-  background: #491254;
-  transition: 0.5s;
-}
-form a {
-  text-decoration: none;
-  font-size: 18px;
-  color: #7f2092;
-  padding: 0 0 0 20px;
 }

@@ -14,7 +14,6 @@ import {
 
 function MainHeader(props) {
   const [person, setPerson] = useState([]);
-  let history = useHistory();
 
   const token = Cookies.get("accessToken");
 

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import "./Login.css";
 import jwt from "jsonwebtoken";
 import Cookies from "js-cookie";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { BiUserCircle } from "react-icons/bi";
 
 function Login(props) {
   const [dataUsers, setDataUsers] = useState([]);
@@ -53,26 +55,52 @@ function Login(props) {
   };
   return (
     <React.Fragment>
-      {/* <div>welcome to the Login page </div> */}
-      <div className="center">
-        <div className="header">Login Form</div>
-        <form onSubmit={handleLogin}>
-          <input
-            type="text"
-            placeholder="Email or Username"
-            onChange={(e) => setAccount(e.target.value)}
-          />
-          <i className="far fa-envelope"></i>
-          <input
-            id="pswrd"
-            type="text"
-            placeholder="Password"
-            onChange={(e) => setPass(e.target.value)}
-          />
-          <i className="fas fa-lock"></i>
-          <input type="submit" value="Sign in" />
-          <a href="http://localhost:3000/register">Regisgter</a>
-        </form>
+      <div className="section">
+        <div className="left"></div>
+        <div className="center">
+          <div className="header">
+            <h1>Welcome to the website</h1>
+          </div>
+          <div className="footer">
+            <div className="btn__login">
+              <button>User Login</button>
+            </div>
+
+            <div className="form__login">
+              <form onSubmit={handleLogin}>
+                <div className="frm__icon">
+                  <span>
+                    <BiUserCircle size="25px" color="white" />
+                  </span>
+
+                  <input
+                    type="text"
+                    placeholder="Email or Username"
+                    onChange={(e) => setAccount(e.target.value)}
+                  />
+                </div>
+
+                <div className="frm__icon">
+                  <span>
+                    <RiLockPasswordLine size="25px" color="white" />
+                  </span>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) => setPass(e.target.value)}
+                  />
+                </div>
+
+                <button type="submit">Login</button>
+              </form>
+            </div>
+
+            <div className="regis">
+              <Link to="/register">Registration</Link>
+            </div>
+          </div>
+        </div>
+        <div className="right"></div>
       </div>
     </React.Fragment>
   );
